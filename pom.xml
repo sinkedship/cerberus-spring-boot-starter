@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sinkedship.cerberus</groupId>
-    <artifactId>cerberus-spring-boot-root</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <artifactId>cerberus-spring-boot-starter-root</artifactId>
+    <version>0.1.0</version>
     <modules>
         <module>cerberus-server-bootstrap-spring-boot-autoconfigure</module>
         <module>cerberus-server-bootstrap-spring-boot-starter</module>
@@ -17,7 +17,7 @@
     </modules>
     <packaging>pom</packaging>
     <description>Spring boot project for cerberus</description>
-    <name>cerberus spring boot</name>
+    <name>cerberus spring boot starter</name>
     <url>https://github.com/sinkedship/cerberus-spring-boot</url>
 
     <inceptionYear>2017</inceptionYear>

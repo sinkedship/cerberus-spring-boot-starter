@@ -16,7 +16,7 @@ Add dependency in Maven:
 <dependency>
     <groupId>com.sinkedship.cerberus</groupId>
     <artifactId>cerberus-server-bootstrap-spring-boot-starter</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
@@ -37,12 +37,12 @@ public class SampleStarterServer implements CommandLineRunner {
     public void run(String... args) {
         A_ServiceImpl a = new A_ServiceImpl();
         B_ServiceImpl b = new B_ServiceImpl();
-        ...
+        // ...
         X_ServiceImpl x = new X_ServiceImpl();
 
         builder.withService(a)
                 .withService(b)
-                ...
+                // .withService(...)
                 .withService(x)
                 .build().boot();
     }
@@ -83,7 +83,7 @@ Add dependency in Maven:
 <dependency>
     <groupId>com.sinkedship.cerberus</groupId>
     <artifactId>cerberus-client-proxy-spring-boot-starter</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
