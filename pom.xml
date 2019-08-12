@@ -13,6 +13,7 @@
         <module>cerberus-client-proxy-spring-boot-autoconfigure</module>
         <module>cerberus-client-proxy-spring-boot-starter</module>
         <module>cerberus-sample-spring-boot-starter</module>
+        <module>cerberus-nexus-deploy-dummy</module>
     </modules>
     <packaging>pom</packaging>
     <description>Spring boot project for cerberus</description>
