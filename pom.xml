@@ -16,7 +16,7 @@
         <module>cerberus-nexus-deploy-dummy</module>
     </modules>
     <packaging>pom</packaging>
-    <description>Spring boot project for cerberus</description>
+    <description>Spring boot starter project for cerberus</description>
     <name>cerberus spring boot starter</name>
     <url>https://github.com/sinkedship/cerberus-spring-boot</url>
 
