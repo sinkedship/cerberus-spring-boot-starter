@@ -1,4 +1,4 @@
-# Spring Boot for Cerberus
+# Spring boot starter for cerberus
 
 Spring Boot autoconfigure and starter module for Cerberus.
 
