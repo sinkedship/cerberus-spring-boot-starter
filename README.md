@@ -73,7 +73,7 @@ cerberus.data-center.consul.port|consul|number|8500|Connecting port to Consul cl
 cerberus.data-center.etcd.end-points|etcd|string|http://localhost:2379|Endpoint urls to Etcd client
 cerberus.data-center.etcd.key-prefix|etcd|string|cerberus/services|Keys' prefix used to register service
 cerberus.data-center.etcd.service-ttl|etcd|number|5000|Service time to live in Etcd, measure in ***millisecond***
-cerberus.data-center.etcd.service-keep-interval|etct|number|3000|Interval to keep service alive which should be smaller than ttl, measure in ***millisecond***
+cerberus.data-center.etcd.service-keep-interval|etcd|number|3000|Interval to keep service alive which should be smaller than ttl, measure in ***millisecond***
 
 ### Client side
 
