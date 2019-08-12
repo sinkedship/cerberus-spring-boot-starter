@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.sinkedship.cerberus.server.spring.boot.autoconfigure.CerberusServerBootstrapAutoConfiguration
