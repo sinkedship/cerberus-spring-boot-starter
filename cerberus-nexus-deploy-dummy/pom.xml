@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
-    <artifactId>cerberus-nexus-deploy-dummy</artifactId>
+    <artifactId>cerberus-nexus-deploy-dummy-starter</artifactId>
 
     <description>
         This is a dummy module for deploying.
