@@ -3,10 +3,7 @@ package com.sinkedship.cerberus.client.spring.boot.autoconfigure;
 import com.sinkedship.cerberus.client.CerberusServiceFactory;
 import com.sinkedship.cerberus.client.config.CerberusClientConfig;
 import com.sinkedship.cerberus.commons.DataCenter;
-import com.sinkedship.cerberus.commons.config.data_center.ConsulConfig;
-import com.sinkedship.cerberus.commons.config.data_center.EtcdConfig;
-import com.sinkedship.cerberus.commons.config.data_center.LocalConfig;
-import com.sinkedship.cerberus.commons.config.data_center.ZookeeperConfig;
+import com.sinkedship.cerberus.commons.config.data_center.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -31,7 +28,8 @@ import java.util.concurrent.TimeUnit;
         CerberusClientProxyAutoConfiguration.ZookeeperProperties.class,
         CerberusClientProxyAutoConfiguration.LocalProperties.class,
         CerberusClientProxyAutoConfiguration.ConsulProperties.class,
-        CerberusClientProxyAutoConfiguration.EtcdProperties.class
+        CerberusClientProxyAutoConfiguration.EtcdProperties.class,
+        CerberusClientProxyAutoConfiguration.K8sProperties.class,
 })
 public class CerberusClientProxyAutoConfiguration {
 
@@ -41,7 +39,8 @@ public class CerberusClientProxyAutoConfiguration {
             ZookeeperProperties zkProperties,
             ConsulProperties consulProperties,
             LocalProperties localProperties,
-            EtcdProperties etcdProperties
+            EtcdProperties etcdProperties,
+            K8sProperties k8sProperties
     ) {
         DataCenter dataCenter = properties.getDataCenter() == null ? DataCenter.LOCAL : properties.getDataCenter();
         CerberusClientConfig config = new CerberusClientConfig(dataCenter);
@@ -57,6 +56,9 @@ public class CerberusClientProxyAutoConfiguration {
                 break;
             case ETCD:
                 setEtcdConfig(config, etcdProperties);
+                break;
+            case K8S:
+                setK8sConfig(config, k8sProperties);
                 break;
             case LOCAL:
                 // Local data center does not need any specific configurations by now.
@@ -246,6 +248,80 @@ public class CerberusClientProxyAutoConfiguration {
 
         public void setKeyPrefix(String keyPrefix) {
             this.keyPrefix = keyPrefix;
+        }
+    }
+
+    private void setK8sConfig(CerberusClientConfig config, K8sProperties properties) {
+        K8sConfig k8sConfig = config.getConcreteDataCenterConfig(K8sConfig.class);
+        if (StringUtils.hasText(properties.getNamespace())) {
+            k8sConfig.setNamespace(properties.getNamespace());
+        }
+        if (StringUtils.hasText(properties.getApiServerHost())) {
+            k8sConfig.setApiServerHost(properties.getApiServerHost());
+        }
+        if (properties.getApiServerPort() != null && properties.getApiServerPort() > 0 &&
+                properties.getApiServerPort() < 65536) {
+            k8sConfig.setApiServerPort(properties.getApiServerPort());
+        }
+        if (properties.verifySsl() != null) {
+            k8sConfig.setVerifySsl(properties.verifySsl());
+        }
+        if (StringUtils.hasText(properties.getAuthToken())) {
+            k8sConfig.setAuthToken(properties.getAuthToken());
+        }
+    }
+
+    @Bean
+    public K8sProperties k8sProperties() {
+        return new K8sProperties();
+    }
+
+    @ConfigurationProperties(prefix = "cerberus.data-center.k8s")
+    static class K8sProperties {
+        String namespace;
+        String apiServerHost;
+        Integer apiServerPort;
+        Boolean verifySsl;
+        String authToken;
+
+        public String getNamespace() {
+            return namespace;
+        }
+
+        public void setNamespace(String namespace) {
+            this.namespace = namespace;
+        }
+
+        public String getApiServerHost() {
+            return apiServerHost;
+        }
+
+        public void setApiServerHost(String apiServerHost) {
+            this.apiServerHost = apiServerHost;
+        }
+
+        public Integer getApiServerPort() {
+            return apiServerPort;
+        }
+
+        public void setApiServerPort(Integer apiServerPort) {
+            this.apiServerPort = apiServerPort;
+        }
+
+        public Boolean verifySsl() {
+            return verifySsl;
+        }
+
+        public void setVerifySsl(Boolean verifySsl) {
+            this.verifySsl = verifySsl;
+        }
+
+        public String getAuthToken() {
+            return authToken;
+        }
+
+        public void setAuthToken(String authToken) {
+            this.authToken = authToken;
         }
     }
 
