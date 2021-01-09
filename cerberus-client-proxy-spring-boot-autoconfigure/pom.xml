@@ -29,7 +29,6 @@
         <dependency>
             <groupId>com.sinkedship.cerberus</groupId>
             <artifactId>cerberus-service-client</artifactId>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 
