@@ -29,7 +29,8 @@ import java.util.List;
         CerberusServerBootstrapProperties.class,
         CerberusServerBootstrapAutoConfiguration.ZookeeperProperties.class,
         CerberusServerBootstrapAutoConfiguration.ConsulProperties.class,
-        CerberusServerBootstrapAutoConfiguration.EtcdProperties.class
+        CerberusServerBootstrapAutoConfiguration.EtcdProperties.class,
+        CerberusServerBootstrapAutoConfiguration.K8sProperties.class
 })
 public class CerberusServerBootstrapAutoConfiguration {
 
@@ -38,7 +39,8 @@ public class CerberusServerBootstrapAutoConfiguration {
             CerberusServerBootstrapProperties properties,
             ZookeeperProperties zkProperties,
             ConsulProperties consulProperties,
-            EtcdProperties etcdProperties
+            EtcdProperties etcdProperties,
+            K8sProperties k8sProperties
     ) {
         DataCenter dataCenter = properties.getDataCenter() == null ? DataCenter.LOCAL : properties.getDataCenter();
         CerberusServerBootstrap.Builder builder = new CerberusServerBootstrap.Builder(dataCenter);
@@ -58,6 +60,7 @@ public class CerberusServerBootstrapAutoConfiguration {
             case ETCD:
                 setEtcdConfig(config, etcdProperties);
                 break;
+            case K8S:
             case LOCAL:
                 // Local data center does not need any specific configurations by now.
                 break;
@@ -248,5 +251,15 @@ public class CerberusServerBootstrapAutoConfiguration {
         public void setServiceKeepInterval(Long serviceKeepInterval) {
             this.serviceKeepInterval = serviceKeepInterval;
         }
+    }
+
+    @Bean
+    public K8sProperties k8sProperties() {
+        return new K8sProperties();
+    }
+
+    @ConfigurationProperties(prefix = "cerberus.data-center.k8s")
+    static class K8sProperties {
+
     }
 }
