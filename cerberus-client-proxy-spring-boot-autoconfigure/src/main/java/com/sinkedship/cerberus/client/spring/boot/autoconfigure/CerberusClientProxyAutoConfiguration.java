@@ -263,8 +263,8 @@ public class CerberusClientProxyAutoConfiguration {
                 properties.getApiServerPort() < 65536) {
             k8sConfig.setApiServerPort(properties.getApiServerPort());
         }
-        if (properties.verifySsl() != null) {
-            k8sConfig.setVerifySsl(properties.verifySsl());
+        if (properties.getVerifySsl() != null) {
+            k8sConfig.setVerifySsl(properties.getVerifySsl());
         }
         if (StringUtils.hasText(properties.getAuthToken())) {
             k8sConfig.setAuthToken(properties.getAuthToken());
@@ -308,7 +308,7 @@ public class CerberusClientProxyAutoConfiguration {
             this.apiServerPort = apiServerPort;
         }
 
-        public Boolean verifySsl() {
+        public Boolean getVerifySsl() {
             return verifySsl;
         }
 
