@@ -165,3 +165,8 @@ cerberus.data-center.consul.host|consul|string|localhost|Connecting host to Cons
 cerberus.data-center.consul.port|consul|number|8500|Connecting port to Consul client agent
 cerberus.data-center.etcd.end-points|etcd|string|http://localhost:2379|Endpoint urls to Etcd client
 cerberus.data-center.etcd.key-prefix|etcd|string|cerberus/services|Keys' prefix used to register service
+cerberus.data-center.k8s.api-server-host|k8s|string|System ENV: KUBERNETES_SERVICE_HOST|K8S API server host
+cerberus.data-center.k8s.api-server-port|k8s|number|System ENV: KUBERNETES_SERVICE_PORT|K8S API server port
+cerberus.data-center.k8s.auth-token|k8s|string|Token file from ```/var/run/secrets/kubernetes.io/serviceaccount/token``` in pod|Auth token to create API client
+cerberus.data-center.k8s.namespace|k8s|string|default|Namespace in kubernetes
+cerberus.data-center.k8s.verify-ssl|k8s|boolean|true|Whether to verify certificate and hostname when making https requests to Kubernetes API server
