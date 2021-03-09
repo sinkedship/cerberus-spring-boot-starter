@@ -7,6 +7,7 @@ import com.sinkedship.cerberus.commons.DataCenter;
 import com.sinkedship.cerberus.commons.config.data_center.ConsulConfig;
 import com.sinkedship.cerberus.commons.config.data_center.EtcdConfig;
 import com.sinkedship.cerberus.commons.config.data_center.ZookeeperConfig;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -37,10 +38,10 @@ public class CerberusServerBootstrapAutoConfiguration {
     @Bean
     public CerberusServerBootstrap.Builder bootstrapBuilder(
             CerberusServerBootstrapProperties properties,
-            ZookeeperProperties zkProperties,
-            ConsulProperties consulProperties,
-            EtcdProperties etcdProperties,
-            K8sProperties k8sProperties
+            @Qualifier("server-zk") ZookeeperProperties zkProperties,
+            @Qualifier("server-consul") ConsulProperties consulProperties,
+            @Qualifier("server-etcd") EtcdProperties etcdProperties,
+            @Qualifier("server-k8s") K8sProperties k8sProperties
     ) {
         DataCenter dataCenter = properties.getDataCenter() == null ? DataCenter.LOCAL : properties.getDataCenter();
         CerberusServerBootstrap.Builder builder = new CerberusServerBootstrap.Builder(dataCenter);
@@ -106,7 +107,7 @@ public class CerberusServerBootstrapAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "server-zk")
     public ZookeeperProperties zkProperties() {
         return new ZookeeperProperties();
     }
@@ -155,7 +156,7 @@ public class CerberusServerBootstrapAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "server-consul")
     public ConsulProperties consulProperties() {
         return new ConsulProperties();
     }
@@ -208,7 +209,7 @@ public class CerberusServerBootstrapAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "server-etcd")
     public EtcdProperties etcdProperties() {
         return new EtcdProperties();
     }
@@ -253,7 +254,7 @@ public class CerberusServerBootstrapAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "server-k8s")
     public K8sProperties k8sProperties() {
         return new K8sProperties();
     }

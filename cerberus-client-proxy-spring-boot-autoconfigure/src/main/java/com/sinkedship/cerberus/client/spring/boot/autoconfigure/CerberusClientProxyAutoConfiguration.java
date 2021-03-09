@@ -4,6 +4,7 @@ import com.sinkedship.cerberus.client.CerberusServiceFactory;
 import com.sinkedship.cerberus.client.config.CerberusClientConfig;
 import com.sinkedship.cerberus.commons.DataCenter;
 import com.sinkedship.cerberus.commons.config.data_center.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -36,11 +37,11 @@ public class CerberusClientProxyAutoConfiguration {
     @Bean
     public CerberusServiceFactory cerberusServiceFactory(
             CerberusClientProxyProperties properties,
-            ZookeeperProperties zkProperties,
-            ConsulProperties consulProperties,
-            LocalProperties localProperties,
-            EtcdProperties etcdProperties,
-            K8sProperties k8sProperties
+            @Qualifier("client-zk") ZookeeperProperties zkProperties,
+            @Qualifier("client-consul") ConsulProperties consulProperties,
+            @Qualifier("client-local") LocalProperties localProperties,
+            @Qualifier("client-etcd") EtcdProperties etcdProperties,
+            @Qualifier("client-k8s") K8sProperties k8sProperties
     ) {
         DataCenter dataCenter = properties.getDataCenter() == null ? DataCenter.LOCAL : properties.getDataCenter();
         CerberusClientConfig config = new CerberusClientConfig(dataCenter);
@@ -89,7 +90,7 @@ public class CerberusClientProxyAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "client-local")
     public LocalProperties localProperties() {
         return new LocalProperties();
     }
@@ -129,8 +130,8 @@ public class CerberusClientProxyAutoConfiguration {
         }
     }
 
-    @Bean
-    public ZookeeperProperties zkProperties() {
+    @Bean(name = "client-zk")
+    public ZookeeperProperties clientZkProperties() {
         return new ZookeeperProperties();
     }
 
@@ -178,7 +179,7 @@ public class CerberusClientProxyAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "client-consul")
     public ConsulProperties consulProperties() {
         return new ConsulProperties();
     }
@@ -224,7 +225,7 @@ public class CerberusClientProxyAutoConfiguration {
 
     }
 
-    @Bean
+    @Bean(name = "client-etcd")
     public EtcdProperties etcdProperties() {
         return new EtcdProperties();
     }
@@ -271,7 +272,7 @@ public class CerberusClientProxyAutoConfiguration {
         }
     }
 
-    @Bean
+    @Bean(name = "client-k8s")
     public K8sProperties k8sProperties() {
         return new K8sProperties();
     }
