@@ -270,6 +270,12 @@ public class CerberusClientProxyAutoConfiguration {
         if (StringUtils.hasText(properties.getAuthToken())) {
             k8sConfig.setAuthToken(properties.getAuthToken());
         }
+        if (properties.debugWithNodePort != null) {
+            k8sConfig.setDebugWithNodePort(properties.getDebugWithNodePort());
+        }
+        if (StringUtils.hasText(properties.getDebugNodeHost())) {
+            k8sConfig.setDebugNodeHost(properties.getDebugNodeHost());
+        }
     }
 
     @Bean(name = "client-k8s")
@@ -284,6 +290,8 @@ public class CerberusClientProxyAutoConfiguration {
         Integer apiServerPort;
         Boolean verifySsl;
         String authToken;
+        Boolean debugWithNodePort;
+        String debugNodeHost;
 
         public String getNamespace() {
             return namespace;
@@ -323,6 +331,22 @@ public class CerberusClientProxyAutoConfiguration {
 
         public void setAuthToken(String authToken) {
             this.authToken = authToken;
+        }
+
+        public Boolean getDebugWithNodePort() {
+            return debugWithNodePort;
+        }
+
+        public void setDebugWithNodePort(Boolean debugWithNodePort) {
+            this.debugWithNodePort = debugWithNodePort;
+        }
+
+        public String getDebugNodeHost() {
+            return debugNodeHost;
+        }
+
+        public void setDebugNodeHost(String debugNodeHost) {
+            this.debugNodeHost = debugNodeHost;
         }
     }
 
