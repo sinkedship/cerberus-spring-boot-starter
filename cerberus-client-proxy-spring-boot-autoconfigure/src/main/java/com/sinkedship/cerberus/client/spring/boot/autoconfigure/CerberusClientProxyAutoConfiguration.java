@@ -4,6 +4,7 @@ import com.sinkedship.cerberus.client.CerberusServiceFactory;
 import com.sinkedship.cerberus.client.config.CerberusClientConfig;
 import com.sinkedship.cerberus.commons.DataCenter;
 import com.sinkedship.cerberus.commons.config.data_center.*;
+import io.airlift.drift.transport.netty.client.DriftNettyMethodInvokerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -66,7 +67,9 @@ public class CerberusClientProxyAutoConfiguration {
                 setLocalConfig(config, localProperties);
                 break;
         }
-        return new CerberusServiceFactory(config);
+        return new CerberusServiceFactory(config,
+                new DriftNettyMethodInvokerFactory<>(config.getDriftNettyConnFactoryConfig(),
+                        clientIdentity -> config.getDriftNettyClientConfig()));
     }
 
     private void setNettyClientConfig(CerberusClientConfig config, CerberusClientProxyProperties properties) {
@@ -77,6 +80,9 @@ public class CerberusClientProxyAutoConfiguration {
         if (properties.getRequestTimeout() != null && properties.getRequestTimeout() > 0) {
             config.getDriftNettyClientConfig().setRequestTimeout(
                     new io.airlift.units.Duration(properties.getRequestTimeout(), TimeUnit.MILLISECONDS));
+        }
+        if (properties.getConnectionPoolEnable() != null) {
+            config.getDriftNettyConnFactoryConfig().setConnectionPoolEnabled(properties.getConnectionPoolEnable());
         }
     }
 

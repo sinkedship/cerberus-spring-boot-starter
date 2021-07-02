@@ -17,6 +17,8 @@ public class CerberusClientProxyProperties {
 
     private Long requestTimeout;
 
+    private Boolean connectionPoolEnable;
+
     public DataCenter getDataCenter() {
         return dataCenter;
     }
@@ -39,5 +41,13 @@ public class CerberusClientProxyProperties {
 
     public void setRequestTimeout(Long requestTimeout) {
         this.requestTimeout = requestTimeout;
+    }
+
+    public Boolean getConnectionPoolEnable() {
+        return connectionPoolEnable;
+    }
+
+    public void setConnectionPoolEnable(Boolean connectionPoolEnable) {
+        this.connectionPoolEnable = connectionPoolEnable;
     }
 }
