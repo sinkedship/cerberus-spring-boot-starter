@@ -92,6 +92,9 @@ public class CerberusServerBootstrapAutoConfiguration {
         if (properties.getRequestTimeout() != null && properties.getRequestTimeout() > 0) {
             bootConfig.setRequestTimeout(Duration.ofMillis(properties.getRequestTimeout()));
         }
+        if (properties.getExecutorThreadCount() != null && properties.getExecutorThreadCount() > 0) {
+            bootConfig.setLogicThreadCount(properties.getExecutorThreadCount());
+        }
     }
 
     private void setZkConfig(CerberusServerConfig config, ZookeeperProperties zkProperties) {

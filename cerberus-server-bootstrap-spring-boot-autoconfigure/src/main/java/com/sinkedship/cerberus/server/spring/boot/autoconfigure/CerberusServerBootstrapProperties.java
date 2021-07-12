@@ -40,6 +40,9 @@ public class CerberusServerBootstrapProperties {
     // request timeout for thrift request, measure in millisecond
     private Long requestTimeout;
 
+    // cerberus.server.bootstrap.executor-thread-count
+    private Integer executorThreadCount;
+
     public DataCenter getDataCenter() {
         return dataCenter;
     }
@@ -102,5 +105,13 @@ public class CerberusServerBootstrapProperties {
 
     public void setRequestTimeout(Long requestTimeout) {
         this.requestTimeout = requestTimeout;
+    }
+
+    public Integer getExecutorThreadCount() {
+        return executorThreadCount;
+    }
+
+    public void setExecutorThreadCount(Integer executorThreadCount) {
+        this.executorThreadCount = executorThreadCount;
     }
 }
