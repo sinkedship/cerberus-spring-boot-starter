@@ -6,7 +6,7 @@
 
     <groupId>com.sinkedship.cerberus</groupId>
     <artifactId>cerberus-spring-boot-starter-root</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2-SNAPSHOT</version>
     <modules>
         <module>cerberus-server-bootstrap-spring-boot-autoconfigure</module>
         <module>cerberus-server-bootstrap-spring-boot-starter</module>
@@ -61,7 +61,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 
-        <cerberus.version>0.2.1</cerberus.version>
+        <cerberus.version>0.2.2-SNAPSHOT</cerberus.version>
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
     </properties>
 

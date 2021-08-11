@@ -16,7 +16,7 @@ Add dependency in Maven:
 <dependency>
     <groupId>com.sinkedship.cerberus</groupId>
     <artifactId>cerberus-server-bootstrap-spring-boot-starter</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -83,7 +83,7 @@ Add dependency in Maven:
 <dependency>
     <groupId>com.sinkedship.cerberus</groupId>
     <artifactId>cerberus-client-proxy-spring-boot-starter</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2-SNAPSHOT</version>
 </dependency>
 ```
 
