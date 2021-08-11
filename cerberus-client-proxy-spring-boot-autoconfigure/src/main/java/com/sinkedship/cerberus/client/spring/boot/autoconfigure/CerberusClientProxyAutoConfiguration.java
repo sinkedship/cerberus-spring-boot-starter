@@ -282,6 +282,9 @@ public class CerberusClientProxyAutoConfiguration {
         if (StringUtils.hasText(properties.getDebugNodeHost())) {
             k8sConfig.setDebugNodeHost(properties.getDebugNodeHost());
         }
+        if (properties.svcRefreshInterval != null) {
+            k8sConfig.setSvcRefreshInterval(properties.svcRefreshInterval);
+        }
     }
 
     @Bean(name = "client-k8s")
@@ -298,6 +301,7 @@ public class CerberusClientProxyAutoConfiguration {
         String authToken;
         Boolean debugWithNodePort;
         String debugNodeHost;
+        Long svcRefreshInterval;
 
         public String getNamespace() {
             return namespace;
@@ -353,6 +357,14 @@ public class CerberusClientProxyAutoConfiguration {
 
         public void setDebugNodeHost(String debugNodeHost) {
             this.debugNodeHost = debugNodeHost;
+        }
+
+        public Long getSvcRefreshInterval() {
+            return svcRefreshInterval;
+        }
+
+        public void setSvcRefreshInterval(Long svcRefreshInterval) {
+            this.svcRefreshInterval = svcRefreshInterval;
         }
     }
 

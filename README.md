@@ -170,3 +170,4 @@ cerberus.data-center.k8s.api-server-port|k8s|number|System ENV: KUBERNETES_SERVI
 cerberus.data-center.k8s.auth-token|k8s|string|Token file from ```/var/run/secrets/kubernetes.io/serviceaccount/token``` in pod|Auth token to create API client
 cerberus.data-center.k8s.namespace|k8s|string|default|Namespace in kubernetes
 cerberus.data-center.k8s.verify-ssl|k8s|boolean|true|Whether to verify certificate and hostname when making https requests to Kubernetes API server
+cerberus.data-center.k8s.svc-refresh-interval|k8s|number|30000|Interval used to refresh cache in K8s service discoverer, measured in ***millisecond***
