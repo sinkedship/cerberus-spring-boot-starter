@@ -171,3 +171,4 @@ cerberus.data-center.k8s.auth-token|k8s|string|Token file from ```/var/run/secre
 cerberus.data-center.k8s.namespace|k8s|string|default|Namespace in kubernetes
 cerberus.data-center.k8s.verify-ssl|k8s|boolean|true|Whether to verify certificate and hostname when making https requests to Kubernetes API server
 cerberus.data-center.k8s.svc-refresh-interval|k8s|number|30000|Interval used to refresh cache in K8s service discoverer, measured in ***millisecond***
+cerberus.data-center.k8s.svc-cache-size|k8s|number|100|Size of service discoverer uses to cache for any resolved k8s service.  
