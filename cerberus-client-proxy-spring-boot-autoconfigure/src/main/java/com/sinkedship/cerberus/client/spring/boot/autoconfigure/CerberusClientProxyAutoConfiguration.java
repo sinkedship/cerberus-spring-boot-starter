@@ -288,6 +288,9 @@ public class CerberusClientProxyAutoConfiguration {
         if (properties.svcCacheSize != null && properties.svcCacheSize >= 0) {
             k8sConfig.setSvcCacheSize(properties.svcCacheSize);
         }
+        if (properties.svcWatch != null) {
+            k8sConfig.setSvcWatch(properties.svcWatch);
+        }
     }
 
     @Bean(name = "client-k8s")
@@ -306,6 +309,7 @@ public class CerberusClientProxyAutoConfiguration {
         String debugNodeHost;
         Long svcRefreshInterval;
         Integer svcCacheSize;
+        Boolean svcWatch;
 
         public String getNamespace() {
             return namespace;
@@ -377,6 +381,14 @@ public class CerberusClientProxyAutoConfiguration {
 
         public void setSvcCacheSize(Integer svcCacheSize) {
             this.svcCacheSize = svcCacheSize;
+        }
+
+        public Boolean getSvcWatch() {
+            return svcWatch;
+        }
+
+        public void setSvcWatch(Boolean svcWatch) {
+            this.svcWatch = svcWatch;
         }
     }
 
